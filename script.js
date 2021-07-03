@@ -33,3 +33,17 @@ function operate(operator, number1, number2){
             break;
     }
 }
+
+for(let i=0; i<=9; i++){
+    const number = document.querySelector(`#number${i}`);
+    number.setAttribute('style', `grid-area: number${i}`);
+}
+
+let number1 = '';
+let number2 = '';
+const numbers = document.querySelectorAll('.numbers');
+const h1 = document.querySelector('h1');
+numbers.forEach(number => number.addEventListener('click', function(e){
+    number1 += e.target.textContent;
+    h1.textContent = number1;
+}))

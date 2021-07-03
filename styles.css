@@ -1,0 +1,45 @@
+#number-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: 
+        "number7 number8 number9 clear clear"
+        "number4 number5 number6 multiply divide"
+        "number1 number2 number3 add subtract"
+        "number0 . . . equals";
+    gap: 2%;
+    height: 100%;
+    width: 100%;
+}
+
+button{
+    font-size: 200%;
+}
+
+#wrapper{
+    height: 60vh;
+    width: 60vh;
+}
+
+#clear{
+    grid-area: clear;
+}
+
+#multiply{
+    grid-area: multiply;
+}
+
+#divide{
+    grid-area: divide;
+}
+
+#add{
+    grid-area: add;
+}
+
+#subtract{
+    grid-area: subtract;
+}
+
+#equals{
+    grid-area: equals;
+}
