@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas: 
-        "number7 number8 number9 clear clear"
+        "number7 number8 number9 delete clear"
         "number4 number5 number6 multiply divide"
         "number1 number2 number3 add subtract"
         "number0 . . . equals";

@@ -43,6 +43,7 @@ const numbers = document.querySelectorAll('.numbers');
 const h1 = document.querySelector('h1');
 const operators = document.querySelectorAll('.operators')
 const clear = document.querySelector('#clear');
+const del = document.querySelector('#delete');
 const equals = document.querySelector('#equals');
 
 for(let i=0; i<=9; i++){
@@ -61,6 +62,11 @@ operators.forEach(op => op.addEventListener('click', function(e){
     calcArr.push(operator);
     h1.textContent = calcArr.join('');
 }))
+
+del.addEventListener('click', () => {
+    calcArr.pop();
+    h1.textContent = calcArr.join('');
+})
 
 clear.addEventListener('click', () => {
     calcArr = [];
