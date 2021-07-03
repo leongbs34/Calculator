@@ -68,9 +68,9 @@ clear.addEventListener('click', () => {
 })
 
 equals.addEventListener('click', () => {
-    let indexOp, number1, number2;
+    let indexOp, number1, number2, answer;
 
-    while(calcArr.length != 1){
+    while(calcArr.length > 1){
         indexOp = calcArr.findIndex(isOperator);
         number1 = calcArr.splice(0, indexOp);
         let operator = calcArr.splice(0, 1);
@@ -89,6 +89,11 @@ equals.addEventListener('click', () => {
         calcArr = [];
         h1.textContent = 'Syntax ERROR';
     }
+    else if(answer == Infinity){
+        calcArr = [];
+        h1.textContent = 'Math ERROR';
+    }
+    else if(calcArr.length == 0) h1.textContent = 'Display';
     else{
         h1.textContent = calcArr.join('');
     }
