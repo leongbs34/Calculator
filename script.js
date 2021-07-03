@@ -1,6 +1,4 @@
-let number1 = '';
-let number2 = '';
-let operator;
+let calcArr = [];
 
 function add(number1, number2){
     return number1 + number2;
@@ -20,16 +18,16 @@ function divide(number1, number2){
 
 function operate(operator, number1, number2){
     switch(operator){
-        case 'add':
+        case '+':
             return add(number1,number2);
             break;
-        case 'subtract':
+        case '-':
             return subtract(number1,number2);
             break;
-        case 'multiply':
+        case 'x':
             return multiply(number1,number2);
             break;
-        case 'divide':
+        case '÷':
             return divide(number1,number2);
             break;
         default:
@@ -38,11 +36,8 @@ function operate(operator, number1, number2){
     }
 }
 
-function clearVar(){
-    number1 = '';
-    number2 = '';
-    operator = '';
-}
+
+const isOperator = (operator) => (operator == 'x') || (operator == '+') || (operator == '-') || (operator == '÷');
 
 const numbers = document.querySelectorAll('.numbers');
 const h1 = document.querySelector('h1');
@@ -56,29 +51,46 @@ for(let i=0; i<=9; i++){
 }
 
 numbers.forEach(number => number.addEventListener('click', function(e){
-    if(!operator){
-        number1 += e.target.textContent;
-        h1.textContent = number1;
-    }
-    else {
-        number2 += e.target.textContent;
-        h1.textContent += e.target.textContent;
-    }
+    let no = e.target.textContent;
+    calcArr.push(no);
+    h1.textContent = calcArr.join('');
 }))
 
 operators.forEach(op => op.addEventListener('click', function(e){
-    operator = e.target.id;
-    h1.textContent += e.target.textContent;
+    let operator = e.target.textContent;
+    calcArr.push(operator);
+    h1.textContent = calcArr.join('');
 }))
 
 clear.addEventListener('click', () => {
-    clearVar();
+    calcArr = [];
     h1.textContent = 'Display';
 })
 
 equals.addEventListener('click', () => {
-    let answer = operate(operator, parseInt(number1), parseInt(number2));
-    clearVar();
-    number1 = answer;
-    h1.textContent = answer;
+    let indexOp, number1, number2;
+
+    while(calcArr.length != 1){
+        indexOp = calcArr.findIndex(isOperator);
+        number1 = calcArr.splice(0, indexOp);
+        let operator = calcArr.splice(0, 1);
+        if(calcArr.findIndex(isOperator) == -1){
+            number2 = calcArr.splice(0);
+        }
+        else{
+            indexOp = calcArr.findIndex(isOperator)
+            number2 = calcArr.splice(0, indexOp);
+        }
+        answer = operate(operator[0], parseInt(number1.join('')), parseInt(number2.join('')));
+        calcArr.unshift(answer);
+    }
+
+    if(answer == 'ERROR'|| Number.isNaN(answer)){ 
+        calcArr = [];
+        h1.textContent = 'Syntax ERROR';
+    }
+    else{
+        h1.textContent = calcArr.join('');
+    }
+
 })
