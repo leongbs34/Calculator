@@ -20,6 +20,10 @@ button{
     width: 60vh;
 }
 
+#delete{
+    grid-area: delete;
+}
+
 #clear{
     grid-area: clear;
 }
